@@ -26,21 +26,28 @@ public class HealthManager : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            hitPoints--;
-            targetHealth = hitPoints;
-            Debug.Log("Hit Points: " + hitPoints);
-            if (hitPoints <= 0)
-            {
-                if(renderer != null)
-                    renderer.enabled = false;
-                Invoke("Explode", 2f);
-            }
-        }
+            decreaseHP();
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+            decreaseHP();
     }
 
     void Explode()
     {
         Destroy(gameObject);
+    }
+
+    void decreaseHP()
+    {
+        hitPoints--;
+        targetHealth = hitPoints;
+        if (hitPoints <= 0)
+        {
+            if (renderer != null)
+                renderer.enabled = false;
+            Invoke("Explode", 2f);
+        }
     }
 }

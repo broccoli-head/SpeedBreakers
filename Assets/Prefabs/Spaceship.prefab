@@ -139,6 +139,10 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
+  marginTopWorld: 2.5
+  marginBottomWorld: 1.5
+  marginLeftWorld: 1.5
+  marginRightWorld: 1.5
 --- !u!114 &3616595851602260115
 MonoBehaviour:
   m_ObjectHideFlags: 0

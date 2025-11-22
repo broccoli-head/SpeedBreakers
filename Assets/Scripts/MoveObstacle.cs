@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveAsteroid : MonoBehaviour
+public class MoveObstacle : MonoBehaviour
 {
     public float speed = 1.5f;
     public float despawnY = -6f;
@@ -12,9 +12,9 @@ public class MoveAsteroid : MonoBehaviour
         bool negativeRotation = Random.value < 0.5f;
 
         if (negativeRotation)
-            rotationSpeed = Random.Range(-30f, -10f);
+            rotationSpeed = Random.Range(-40f, -15f);
         else
-            rotationSpeed = Random.Range(10f, 30f);
+            rotationSpeed = Random.Range(15f, 40f);
     }
 
     void Update()
