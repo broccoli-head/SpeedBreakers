@@ -1,19 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class BackgroundProgressTracker : MonoBehaviour
 {
     public Slider progressBar;
-    public int scrollsToGoal = 10;
     public float smoothSpeed = 15f;
 
     public LevelSpeedController speedController;
+    public ScrollingBackground scrollingBackground;
 
     private float targetValue = 0f;
     private bool finalBoostTriggered = false;
 
+    public int scrollsToGoal = 10;
+
     private void Start()
     {
+        if (scrollingBackground == null)
+            scrollingBackground = FindAnyObjectByType<ScrollingBackground>();
+
         progressBar.minValue = 0f;
         progressBar.maxValue = 1f;
         progressBar.value = 0f;
@@ -39,5 +45,19 @@ public class BackgroundProgressTracker : MonoBehaviour
             finalBoostTriggered = true;
             speedController.TriggerFinalBoost();
         }
+    }
+
+    public void SetGoal(int newGoal)
+    {
+        scrollsToGoal = newGoal;
+        ResetProgressImmediate();
+    }
+
+    public void ResetProgressImmediate()
+    {
+        progressBar.value = 0f;
+        targetValue = 0f;
+        finalBoostTriggered = false;
+        ScrollingBackground.ResetTotalScrolledDistance();
     }
 }

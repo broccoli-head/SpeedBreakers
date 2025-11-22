@@ -6,16 +6,18 @@ public class HealthManager : MonoBehaviour
     public int hitPoints;
     public Slider healthSlider;
     public float smoothSpeed;
+    public GameObject explosionPrefab;
+    public GameObject gameOverScreen;
+    public AudioSource collisionSource;
 
+    public static int playerCount = 2;
     private float targetHealth;
-    private Renderer renderer;
 
     void Start()
     {
         targetHealth = hitPoints;
         healthSlider.maxValue = hitPoints;
         healthSlider.value = hitPoints;
-        renderer = GetComponent<Renderer>();
     }
 
     void Update()
@@ -34,20 +36,31 @@ public class HealthManager : MonoBehaviour
             decreaseHP();
     }
 
-    void Explode()
-    {
-        Destroy(gameObject);
-    }
 
     void decreaseHP()
     {
+        if (LevelSpeedController.PlayersInvincible) return;
+
         hitPoints--;
         targetHealth = hitPoints;
-        if (hitPoints <= 0)
+        collisionSource.Play();
+
+        if (hitPoints == 0)
         {
-            if (renderer != null)
-                renderer.enabled = false;
-            Invoke("Explode", 2f);
+            if (GetComponent<Renderer>() != null)
+                GetComponent<Renderer>().enabled = false;
+            
+            playerCount--;
+
+            if (playerCount <= 0)
+            {
+                gameOverScreen.SetActive(true);
+                ScrollingBackground.gameRunning = false;
+            }
+
+            healthSlider.value = 0;
+            Instantiate(explosionPrefab, transform);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 }

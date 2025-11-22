@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
@@ -16,6 +15,7 @@ public class ObstacleSpawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+
         if (timer >= spawnInterval)
         {
             timer = 0;
@@ -35,15 +35,14 @@ public class ObstacleSpawner : MonoBehaviour
             lastNegative = false;
         }
         else lastNegative = true;
-     
+
         GameObject obj = Instantiate(
             prefabs[prefabIndex],
             new Vector3(positionX, spawnY, 0),
             Quaternion.identity
         );
 
-
-        transform.localScale = new Vector3(scale, scale, scale);
+        obj.transform.localScale = new Vector3(scale, scale, scale);
 
         MoveObstacle mover = obj.AddComponent<MoveObstacle>();
         mover.speed = objectSpeed;

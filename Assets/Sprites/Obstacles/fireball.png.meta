@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,10 +116,10 @@ TextureImporter:
       name: fireball_0
       rect:
         serializedVersion: 2
-        x: 78
-        y: 10
-        width: 348
-        height: 502
+        x: 73
+        y: 12
+        width: 364
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
